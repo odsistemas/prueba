@@ -11,7 +11,7 @@ MDScreen:
 '''
 
 
-class Main(MDApp):
+class Boton(MDApp):
     data = {
         'Python': 'language-python',
         'PHP': 'language-php',
@@ -24,4 +24,4 @@ class Main(MDApp):
         return Builder.load_string(KV)
 
 
-Main().run()
+Boton().run()
