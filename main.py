@@ -9,7 +9,7 @@ from kivymd.uix.label import MDLabel
 class MainApp(MDApp):
 
     def cambia_texto(self):
-        # self.root.ids.cajatexto.text = "aaaaa"
+        # self.root.ids.cajatexto.text = "prueba"
         self.root.ids.listado.text = self.root.ids.cajatexto.text
 
     def build(self):
