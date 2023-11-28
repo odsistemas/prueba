@@ -1,0 +1,143 @@
+# .kv file of tabbed panel
+
+<Tab>:
+
+	# creating the size
+	# and the alignment of the tab
+	size_hint: 1, 1
+	pos_hint: {'center_x': .5, 'center_y': .5}
+	do_default_tab: False
+
+	# Create tab 1
+	TabbedPanelItem:
+        text:'Procesos'
+        ScatterLayout:
+            do_rotation:False
+            do_scale:True
+            do_translate:True
+            Image:
+                source:"fondo7.png"
+                
+                allow_stretch:True
+                keep_ratio: False
+                    
+            GridLayout:
+                cols:1
+            Button:
+                id:actualiza
+                text:"Actualiza Artículos"
+                size_hint:(.88,.085)    
+                pos_hint:{"x":0.06,"y":.7}
+                font_size:30
+                on_press:root.procesando()
+            Label:
+                id:lprocesando
+                text:""
+                size_hint:(.6,.08)    
+                pos_hint:{"x":0.2,"y":.5}
+                font_size:30
+    
+       # Create 2do tab
+	TabbedPanelItem:
+        text:'Filtros'
+        ScatterLayout:
+            do_rotation:False
+            do_scale:True
+            do_translate:True
+            Image:
+                source:"fondo7.png"
+                
+                allow_stretch:True
+                keep_ratio: False
+            GridLayout:
+                cols:1
+            
+            TextInput:       
+                id:input_busqueda
+                text:"Ingrese clave de búsqueda"
+                size_hint:(.88,.085)    
+                pos_hint:{"x":0.06,"y":.5}
+                font_size:30 
+            
+            
+            
+            
+            Button:
+                id:boton_salida
+                text:"Procesa filtros"
+                size_hint:(.88,.085)    
+                pos_hint:{"x":0.06,"y":.7}
+                font_size:30
+                on_press:root.recarga()  
+                    
+
+	# Create 3nd tab
+	TabbedPanelItem:
+        text:'Resultado'
+        ScatterLayout:
+            do_rotation:False
+            do_scale:True
+            do_translate:True
+            Image:
+                source:"fondo8.png"
+                
+                allow_stretch:True
+                keep_ratio: False
+                        
+               
+                       
+                
+                
+            ExampleViewer: 
+                
+                
+                
+                
+
+                RecycleBoxLayout: 
+                    
+                    color:(0, 0.7, 0.4, 0.8) 
+                    default_size: None, dp(56) 
+                    
+                    # defines the size of the widget in reference to width and height 
+                    default_size_hint: 1, None 
+                    size_hint_y: None
+                    height: self.minimum_height 
+                    orientation: 'vertical' # defines the orientation of data items 
+                    pos_hint:(None,.5)
+                    
+                    viewclass: 'Button'  # defines the viewtype for the data items. 
+                    orientation: "vertical"
+                    spacing: 0
+                    padding:10, 60
+                    space_x: self.size[0]
+		
+	# Create 4to tab
+	TabbedPanelItem:
+        text:'Fin'
+        ScatterLayout:
+            do_rotation:False
+            do_scale:True
+            do_translate:True
+            Image:
+                source:"fondo7.png"
+                
+                allow_stretch:True
+                keep_ratio: False
+            GridLayout:
+                cols:1
+            Button:
+                id:boton_salida
+                text:"Salida del sistema"
+                size_hint:(.88,.085)    
+                pos_hint:{"x":0.06,"y":.7}
+                font_size:30
+                on_press:root.salida()  
+            TextInput:       
+                id:input_busqueda
+                text:"Salida del sistema"
+                size_hint:(.88,.085)    
+                pos_hint:{"x":0.06,"y":.5}
+                font_size:30
+        
+                
