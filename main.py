@@ -1,73 +1,73 @@
 from kivymd.app import MDApp
-from kivymd.uix.screen import MDScreen
-from kivymd.uix.button import MDRectangleFlatButton
-from kivymd.uix.textfield import MDTextField
-from kivymd.uix.label import MDLabel
+from kivy.uix.screenmanager import Screen, ScreenManager
+from kivymd.uix.datatables import MDDataTable
+from kivy.metrics import dp
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.lang.builder import Builder
 
 
-class MainApp(MDApp):
+KV = """
+ScreenManager:
+    DemoPage:
+    
+    ClientsTable:
 
-    def cambia_texto(self):
-        # self.root.ids.cajatexto.text = "aaaaa"
-        self.root.ids.listado.text = self.root.ids.cajatexto.text
 
+<DemoPage>:
+    MDRaisedButton:
+        text: " Listar "
+        size_hint: 0.5, 0.06
+        pos_hint: {"center_x": 0.5, "center_y": 0.4}
+        on_release: 
+            root.manager.current = 'Clientstable'
+            
+            
+<ClientsTable>:
+    name: 'Clientstable'
+ """
+
+
+class ClientsTable(Screen):
+    def load_table(self):
+        layout = AnchorLayout()
+
+        self.data_tables = MDDataTable(
+            pos_hint={'center_y': 0.5, 'center_x': 0.5},
+            size_hint=(0.9, 0.6),
+            use_pagination=True,
+            check=True,
+            column_data=[
+                ("No.", dp(30)),
+                ("Descripcion", dp(60)),
+                ("Precio", dp(30)),
+            ],
+            row_data=[
+                (f"{i + 1}", "Descripcion "+f"{i + 1}", "999.99")
+                for i in range(50)], )
+        self.add_widget(self.data_tables)
+        return layout
+
+    def on_enter(self):
+        self.load_table()
+
+
+class DemoPage(Screen):
+    pass
+
+
+sm = ScreenManager()
+
+sm.add_widget(DemoPage(name='demopage'))
+sm.add_widget(ClientsTable(name='Clientstable'))
+
+
+class Main(MDApp):
     def build(self):
+
         self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "Blue"
-
-        return (
-
-
-            MDScreen(
+        screen = Builder.load_string(KV)
+        return screen
 
 
-                MDLabel(
-                    text="Búsqueda de artículos",
-                    bold=True,
-                    font_style="H6",
-                    pos_hint={"center_x": 0.9, "center_y": 0.95},
-
-                ),
-
-                MDTextField(
-                    id='cajatexto',
-                    hint_text="Ingrese detalle a buscar",
-                    mode="rectangle",
-                    required=True,
-                    helper_text_mode="on_error",
-                    size_hint_x=.8,
-                    pos_hint={"center_x": 0.5, "center_y": 0.85},
-                    line_color_normal="green"
-
-                ),
-
-                MDRectangleFlatButton(
-                    icon="archive",
-                    text="  Archivos ",
-                    pos_hint={"center_x": 0.5, "center_y": 0.2},
-                    font_size=70,
-                    md_bg_color="#674EF1",
-
-                ),
-                MDRectangleFlatButton(
-                    id='listado',
-                    icon="list-box",
-                    text="  Listados ",
-                    pos_hint={"center_x": 0.5, "center_y": 0.4},
-                    font_size=70,
-                    md_bg_color="#4EF1A2",
-                ),
-                MDRectangleFlatButton(
-                    icon="run",
-                    text=" Procesos ",
-                    pos_hint={"center_x": 0.5, "center_y": 0.6},
-                    font_size=70,
-                    md_bg_color="#478C6B",
-                    on_press=lambda r: self.cambia_texto()
-                )
-            )
-        )
-
-
-if __name__ == '__main__':
-    MainApp().run()
+if __name__ == "__main__":
+    Main().run()
