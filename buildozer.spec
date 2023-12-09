@@ -6,10 +6,10 @@
 [app]
 
 # (str) Title of your application
-title = Busca Articulos
+title = My Application
 
 # (str) Package name
-package.name = busca
+package.name = myapp
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.test
