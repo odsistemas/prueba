@@ -4,7 +4,8 @@ from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.lang.builder import Builder
-
+from kivymd.uix.textfield import MDTextField
+from kivymd.uix.label import MDLabel
 
 KV = """
 ScreenManager:
@@ -14,6 +15,20 @@ ScreenManager:
 
 
 <DemoPage>:
+    MDLabel:
+        text:"Búsqueda de artículos"
+        bold:True
+        
+        pos_hint:{"center_x": 0.9, "center_y": 0.95}
+       
+    MDTextField:
+        id:'cajatexto'
+        hint_text:"Ingrese detalle a buscar"
+        mode:"rectangle"
+        required:True
+        pos_hint: {"center_x": 0.5, "center_y": 0.85}
+        
+        
     MDRaisedButton:
         text: " Listar "
         size_hint: 0.5, 0.06
@@ -24,6 +39,16 @@ ScreenManager:
             
 <ClientsTable>:
     name: 'Clientstable'
+ 
+    MDRaisedButton:
+        text: " Fin "
+        size_hint: 0.5, 0.06
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        on_press: app.stop()
+            
+ 
+ 
+ 
  """
 
 
@@ -32,10 +57,11 @@ class ClientsTable(Screen):
         layout = AnchorLayout()
 
         self.data_tables = MDDataTable(
-            pos_hint={'center_y': 0.5, 'center_x': 0.5},
-            size_hint=(0.9, 0.6),
+            pos_hint={'center_y': 0.55, 'center_x': 0.5},
+            size_hint=(0.9, 0.75),
             use_pagination=True,
             check=True,
+            rows_num=10,
             column_data=[
                 ("No.", dp(30)),
                 ("Descripcion", dp(60)),
