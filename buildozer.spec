@@ -6,13 +6,13 @@
 [app]
 
 # (str) Title of your application
-title = My Application
+title = Data Table
 
 # (str) Package name
-package.name = myapp
+package.name = datatable
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = odsistemas.com
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -42,7 +42,15 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3==3.10.0, kivy==2.1.0, kivymd==1.1.1, sdl2_ttf==2.0.15, pillow,mysql-connector-python
+## Step 3: Create the spec file
+
+Run the command below, a file name buildozer.spec will be created. Double click the file to edit it.
+You can edit the app name, package name and so forth.
+
+Scroll down to requirements, make sure they look as follows:
+requirements = python3, kivy==2.1.0, kivymd==1.1.1, sdl2_ttf==2.0.15, pillow
+
+You can also add app permissions if your application requires special permissions.
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -103,7 +111,7 @@ fullscreen = 0
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
-android.permissions = android.permission.INTERNET
+android.permissions = android.permission.INTERNET, (name=android.permission.WRITE_EXTERNAL_STORAGE;maxSdkVersion=18)
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
