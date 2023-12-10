@@ -33,8 +33,7 @@ ScreenManager:
         text: " Listar "
         size_hint: 0.5, 0.06
         pos_hint: {"center_x": 0.5, "center_y": 0.4}
-        on_release: 
-            root.manager.current = 'Clientstable'
+       
             
             
 <ClientsTable>:
